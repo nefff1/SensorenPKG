@@ -28,9 +28,16 @@ l_temps <- sapply(urls, f_temp)
 
 d_temp <- data.frame(temp = l_temps)
 d_temp$room <- rownames(d_temp)
-d_temp$time <- Sys.time()
+d_temp$time <- as.character(Sys.time())
 rownames(d_temp) <- NULL
 
-write.table(d_temp[, c("time", "room", "temp")],
-            file = "Output/temp_data.txt",
-            append = T)
+if (any(list.files("Output") == "temp_data.txt")) {
+  write.table(d_temp[, c("time", "room", "temp")],
+              col.names = F,
+              file = "Output/temp_data.txt",
+              append = T, row.names = F)
+} else {
+  write.table(d_temp[, c("time", "room", "temp")],
+              file = "Output/temp_data.txt",
+              row.names = F)
+}
