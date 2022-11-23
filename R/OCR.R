@@ -33,7 +33,7 @@ d_temp$room <- rownames(d_temp)
 d_temp$time <- as.character(Sys.time())
 rownames(d_temp) <- NULL
 
-if (any(list.files("Output") == "temp_data.txt")) {
+if ("temp_data.txt" %in% list.files("Output")) {
   write.table(d_temp[, c("time", "room", "temp")],
               col.names = F,
               file = "Output/temp_data.txt",
