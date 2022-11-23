@@ -29,6 +29,12 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      - name: Install tesseract
+        run: sudo apt install tesseract-ocr
+
+      - name: Install tesseract pt2
+        run: sudo apt install libtesseract-dev
+
       - name: Query dependencies
         run: |
           install.packages('remotes')
