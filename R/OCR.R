@@ -1,3 +1,5 @@
+install.packages("tesseract")
+install.packages("webshot")
 # library(tesseract)
 # library(webshot)
 webshot::install_phantomjs()
