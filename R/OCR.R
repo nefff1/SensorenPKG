@@ -1,9 +1,9 @@
-library(tesseract)
-library(webshot)
+# library(tesseract)
+# library(webshot)
 webshot::install_phantomjs()
-eng <- tesseract("eng")
+eng <- tesseract::tesseract("eng")
 f_temp <- function(url) {
-  webshot(url = url, file = paste0("Screenshots/", url, "tmp.png"))
+  webshot::webshot(url = url, file = paste0("Screenshots/", url, "tmp.png"))
   img <- png::readPNG(paste0("Screenshots/", url, "tmp.png"))
   png::writePNG(img[450:550,780:860,], paste0("Screenshots/", url, "tmp.png"))
   text <- tesseract::ocr(paste0("Screenshots/", url, "tmp.png"), engine = eng)
