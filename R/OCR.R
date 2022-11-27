@@ -9,7 +9,23 @@ f_temp <- function(url) {
   img <- png::readPNG(paste0("Screenshots/", url, "tmp.png"))
   png::writePNG(img[450:550,780:860,], paste0("Screenshots/", url, "tmp.png"))
   text <- tesseract::ocr(paste0("Screenshots/", url, "tmp.png"), engine = eng)
-  as.numeric(substr(text, 1, regexpr("\\.", text)[[1]] + 1))
+  out <- as.numeric(substr(text, 1, regexpr("\\.", text)[[1]] + 1))
+
+  if (is.na(out)){
+    png::writePNG(img[450:550,780:814,], paste0("Screenshots/", url, "tmp_pt1.png"))
+    text_pt1 <- tesseract::ocr(paste0("Screenshots/", url, "tmp_pt1.png"), engine = eng)
+    png::writePNG(img[450:550,815:840,], paste0("Screenshots/", url, "tmp_pt2.png"))
+    text_pt2 <- tesseract::ocr(paste0("Screenshots/", url, "tmp_pt2.png"), engine = eng)
+    png::writePNG(img[450:550,840:860,], paste0("Screenshots/", url, "tmp_pt3.png"))
+    text_pt3 <- tesseract::ocr(paste0("Screenshots/", url, "tmp_pt3.png"), engine = eng)
+
+    out <- as.numeric(paste0(substr(text_pt1, 1, 1),
+                             substr(text_pt2, 1, 1),
+                             ".",
+                             substr(text_pt3, 1, 1)))
+  }
+
+  out
 }
 
 urls <- c(
