@@ -1,5 +1,6 @@
 install.packages("tesseract")
 install.packages("webshot")
+install.packages("stringr")
 # library(tesseract)
 # library(webshot)
 webshot::install_phantomjs()
@@ -46,8 +47,30 @@ l_temps <- sapply(urls, f_temp)
 
 d_temp <- data.frame(temp = l_temps)
 d_temp$room <- rownames(d_temp)
+
+
+# ------------------------------------------------------------------------------.
+
+url_out <- "https://www.tecson-data.ch/zurich/mythenquai/"
+
+temp_out <- readLines(url_out)
+
+temp_out <- temp_out[which(grepl(">Lufttemperatur</span>", temp_out)) + 6]
+
+temp_out <- substr(temp_out, regexpr("font-weight:bold;", temp_out) + 19,
+                   regexpr("font-weight:bold;", temp_out) + 23)
+temp_out <- stringr::str_extract_all(temp_out, "[0-9.,.-]+")[[1]]
+temp_out <- as.numeric(gsub(",", "\\.", temp_out))
+
+d_temp <- rbind(d_temp,
+      data.frame(temp = temp_out, room = "out"))
+
+# ------------------------------------------------------------------------------.
+
 d_temp$time <- as.character(Sys.time())
 rownames(d_temp) <- NULL
+
+# ------------------------------------------------------------------------------.
 
 if ("temp_data.txt" %in% list.files("Output")) {
   write.table(d_temp[, c("time", "room", "temp")],

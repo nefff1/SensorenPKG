@@ -14,3 +14,4 @@ Imports:
     tesseract (>= 5.1.0),
     webshot (>= 0.5.4),
     png (>= 0.1-7)
+    stringr (>= 1.4.0)
