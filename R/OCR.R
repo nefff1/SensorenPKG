@@ -6,7 +6,7 @@ install.packages("stringr")
 webshot::install_phantomjs()
 eng <- tesseract::tesseract("eng")
 f_temp <- function(url) {
-  webshot::webshot(url = url, file = paste0("Screenshots/", url, "tmp.png"))
+  webshot2::webshot(url = url, file = paste0("Screenshots/", url, "tmp.png"))
   img <- png::readPNG(paste0("Screenshots/", url, "tmp.png"))
   png::writePNG(img[500:580,420:510,], paste0("Screenshots/", url, "tmp.png"))
   text <- tesseract::ocr(paste0("Screenshots/", url, "tmp.png"), engine = eng)
