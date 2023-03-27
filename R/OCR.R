@@ -52,19 +52,20 @@ d_temp$room <- rownames(d_temp)
 
 # ------------------------------------------------------------------------------.
 
-url_out <- "https://www.tecson-data.ch/zurich/mythenquai/"
-
-temp_out <- readLines(url_out)
-
-temp_out <- temp_out[which(grepl(">Lufttemperatur</span>", temp_out)) + 6]
-
-temp_out <- substr(temp_out, regexpr("font-weight:bold;", temp_out) + 19,
-                   regexpr("font-weight:bold;", temp_out) + 23)
-temp_out <- stringr::str_extract_all(temp_out, "[0-9.,.-]+")[[1]]
-temp_out <- as.numeric(gsub(",", "\\.", temp_out))
-
-d_temp <- rbind(d_temp,
-      data.frame(temp = temp_out, room = "out"))
+# url_out <- "https://www.tecson-data.ch/zurich/mythenquai/"
+#
+# temp_out <- readLines(url_out)
+#
+# temp_out <- temp_out[which(grepl(">Lufttemperatur</span>", temp_out)) + 6]
+#
+# temp_out <- substr(temp_out, regexpr("font-weight:bold;", temp_out) + 19,
+#                    regexpr("font-weight:bold;", temp_out) + 23)
+# temp_out <- stringr::str_extract_all(temp_out, "[0-9.,.-]+")[[1]]
+# temp_out <- as.numeric(gsub(",", "\\.", temp_out))
+#
+# d_temp <- rbind(d_temp,
+#       data.frame(temp = temp_out, room = "out"))
+# https://opendata.swiss/de/dataset/messwerte-der-wetterstationen-der-wasserschutzpolizei-zurich2/resource/d3fecb83-9701-42e8-8b1c-1d9ad8523e06
 
 # ------------------------------------------------------------------------------.
 
