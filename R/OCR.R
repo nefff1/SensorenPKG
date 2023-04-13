@@ -18,7 +18,7 @@ f_temp <- function(url) {
     text_pt1 <- tesseract::ocr("Screenshot_tmp_pt1.png", engine = eng)
     png::writePNG(img[500:580,463:484,], "Screenshot_tmp_pt2.png")
     text_pt2 <- tesseract::ocr("Screenshot_tmp_pt2.png", engine = eng)
-    png::writePNG(img[500:580,487:510,], "Screenshot_tmp_pt3.png")
+    png::writePNG(img[500:580,488:510,], "Screenshot_tmp_pt3.png")
     text_pt3 <- tesseract::ocr("Screenshot_tmp_pt3.png", engine = eng)
 
     out <- as.numeric(paste0(substr(text_pt1, 1, 1),
