@@ -3,7 +3,7 @@ install.packages("webshot2")
 install.packages("stringr")
 # library(tesseract)
 # library(webshot)
-webshot::install_phantomjs()
+# webshot::install_phantomjs()
 eng <- tesseract::tesseract("eng")
 f_temp <- function(url) {
   webshot2::webshot(url = url, file = "Screenshot_tmp.png")
