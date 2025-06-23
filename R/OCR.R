@@ -31,23 +31,15 @@ f_temp <- function(url) {
 }
 
 urls <- c(
-  room0 = "https://deployment.egain.io/indoor/EGA94001446031B",
-  room1 = "https://deployment.egain.io/indoor/EGA94006601031B",
-  room2 = "https://deployment.egain.io/indoor/EGA94006329031B",
-  room3 = "https://deployment.egain.io/indoor/EGA94005487031B",
-  room4 = "https://deployment.egain.io/indoor/EGA94000446031B",
-  room5 = "https://deployment.egain.io/indoor/EGA94003678031B",
-  room6 = "https://deployment.egain.io/indoor/EGA94003565031B",
-  room7 = "https://deployment.egain.io/indoor/EGA94003382031B",
-  room8 = "https://deployment.egain.io/indoor/EGA94003212031B",
-  room9 = "https://deployment.egain.io/indoor/EGA94002076031B"
+  indoor = "https://deployment.egain.io/indoor/EGA94001446031B",
+  outdoor = "https://deployment.egain.io/indoor/EGA94005487031B"
 )
 
 
 l_temps <- sapply(urls, f_temp)
 
 d_temp <- data.frame(temp = l_temps)
-d_temp$room <- rownames(d_temp)
+d_temp$where <- rownames(d_temp)
 
 
 # ------------------------------------------------------------------------------.
@@ -74,13 +66,13 @@ rownames(d_temp) <- NULL
 
 # ------------------------------------------------------------------------------.
 
-if ("temp_data.txt" %in% list.files("Output")) {
-  write.table(d_temp[, c("time", "room", "temp")],
+if ("temp_data_inout.txt" %in% list.files("Output")) {
+  write.table(d_temp[, c("time", "where", "temp")],
               col.names = F,
-              file = "Output/temp_data.txt",
+              file = "Output/temp_data_inout.txt",
               append = T, row.names = F)
 } else {
-  write.table(d_temp[, c("time", "room", "temp")],
-              file = "Output/temp_data.txt",
+  write.table(d_temp[, c("time", "where", "temp")],
+              file = "Output/temp_data_inout.txt",
               row.names = F)
 }
