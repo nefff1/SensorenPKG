@@ -38,6 +38,19 @@ urls <- c(
 
 l_temps <- sapply(urls, f_temp)
 
+if (is.na(l_temps["indoor"])){
+  l_temps["indoor"] <- f_temp(urls["indoor"])
+}
+if (is.na(l_temps["indoor"])){
+  l_temps["indoor"] <- f_temp(urls["indoor"])
+}
+if (is.na(l_temps["outdoor"])){
+  l_temps["outdoor"] <- f_temp(urls["outdoor"])
+}
+if (is.na(l_temps["outdoor"])){
+  l_temps["outdoor"] <- f_temp(urls["outdoor"])
+}
+
 d_temp <- data.frame(temp = l_temps)
 d_temp$where <- rownames(d_temp)
 
