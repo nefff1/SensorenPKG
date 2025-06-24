@@ -8,17 +8,17 @@ eng <- tesseract::tesseract("eng")
 f_temp <- function(url) {
   webshot2::webshot(url = url, file = "Screenshot_tmp.png")
   img <- png::readPNG("Screenshot_tmp.png")
-  png::writePNG(img[500:580,420:510,], "Screenshot_tmp_cut.png")
+  png::writePNG(img[500:580,400:590,], "Screenshot_tmp_cut.png")
   text <- tesseract::ocr("Screenshot_tmp_cut.png", engine = eng)
 
   out <- as.numeric(substr(text, 1, regexpr("\\.", text)[[1]] + 1))
 
   if (is.na(out)){
-    png::writePNG(img[500:580,420:463,], "Screenshot_tmp_pt1.png")
+    png::writePNG(img[500:580,490:540,], "Screenshot_tmp_pt1.png")
     text_pt1 <- tesseract::ocr("Screenshot_tmp_pt1.png", engine = eng)
-    png::writePNG(img[500:580,463:484,], "Screenshot_tmp_pt2.png")
+    png::writePNG(img[500:580,540:560,], "Screenshot_tmp_pt2.png")
     text_pt2 <- tesseract::ocr("Screenshot_tmp_pt2.png", engine = eng)
-    png::writePNG(img[500:580,488:510,], "Screenshot_tmp_pt3.png")
+    png::writePNG(img[500:580,563:584,], "Screenshot_tmp_pt3.png")
     text_pt3 <- tesseract::ocr("Screenshot_tmp_pt3.png", engine = eng)
 
     out <- as.numeric(paste0(substr(text_pt1, 1, 1),
